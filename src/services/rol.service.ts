@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { Rol } from './rol';
 
 @Injectable({
   providedIn: 'root'
@@ -11,5 +12,9 @@ export class RolService {
 
   getRoles(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseURL}/rol`);
+  }
+
+  getRol(): Observable<Rol> {
+    return this.http.get<Rol>(`${this.baseURL}/rol/1`);
   }
 }

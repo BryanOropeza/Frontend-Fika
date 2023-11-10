@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           console.log(userData);
 
           // Realiza el redireccionamiento aquí después de un inicio de sesión exitoso
-          this.router.navigateByUrl('/inicio');
+          this.router.navigateByUrl('/inicio-login');
 
           // También puedes almacenar la información del usuario en el servicio o en localStorage
           // para acceder a ella en otras partes de la aplicación.

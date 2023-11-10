@@ -14,18 +14,22 @@ import { User } from 'src/services/user';
 export class RegistroUsuarioComponent implements OnInit {
   registrationError: String = "";
   roles: Rol[] = [];
-  registrationForm = this.formBuilder.group({
-    user: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    rol_id: [0, Validators.required] // Puedes ajustar el valor según tu necesidad
-  });
+  rol: Rol = {};
+  usuario: User = {
+    codigo: 0,
+    user: '', // Incluye un valor inicial para user
+    email: '',
+    password: '',
+    estate: 'Activo',
+    rol_id: {}
+  };
+
 
   constructor(
     private usuarioService: UsuarioService,
     private rolService: RolService,
-    private formBuilder: FormBuilder,
-    private router: Router
+    /* private formBuilder: FormBuilder,
+    private router: Router */
   ) { }
 
   ngOnInit() {
@@ -38,61 +42,22 @@ export class RegistroUsuarioComponent implements OnInit {
         console.error('Error al obtener la lista de roles', error);
       }
     );
+
+    this.rolService.getRol().subscribe(
+      (rol) => {
+        this.usuario.rol_id = rol;
+        console.log(rol);
+      }
+    )
   }
-
-  get user() {
-    return this.registrationForm.controls.user;
-  }
-
-  get password() {
-    return this.registrationForm.controls.password;
-  }
-
-  get rol_id() {
-    return this.registrationForm.controls.rol_id;
-  }
-
-  get email() {
-    return this.registrationForm.controls.email;
-  }
-
-
 
   registrarUsuario() {
-    if (this.registrationForm.valid) {
-      this.registrationError = "";
-
-      const selectedRol = this.roles.find((rol) => rol.codigo === this.registrationForm.value.rol_id);
-
-      if (selectedRol) {
-        const user: User = {
-          user: this.registrationForm.value.user || '',
-          email: this.registrationForm.value.email || '',
-          password: this.registrationForm.value.password || '',
-          rol_id: selectedRol // Asigna el objeto RolEntity completo
-        };
-
-        this.usuarioService.registrarUsuario(user).subscribe({
-          next: (response: User) => {
-            console.log('Usuario registrado con éxito', response);
-            this.router.navigateByUrl('/inicio');
-            // Aquí puedes manejar la respuesta, por ejemplo, redirigir a otra página.
-          },
-          error: (error) => {
-            console.error('Error al registrar usuario', error);
-            // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error.
-          },
-          complete: () => {
-            console.info("Registro Completo");
-            this.registrationForm.reset();
-          }
-        });
-      } else {
-        // El formulario no es válido, puedes mostrar un mensaje de error o realizar alguna otra acción.
-
-        this.registrationForm.markAllAsTouched();
-        this.registrationError = "Por favor, completa todos los campos correctamente.";
-      }
-    }
+    this.usuarioService.registrarUsuario(this.usuario).subscribe(response => {
+      console.log('Usuario registrado con éxito', response);
+      // Aquí puedes redirigir a otra página o mostrar un mensaje de éxito.
+    }, error => {
+      console.error('Error al registrar usuario', error);
+      // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error.
+    });
   }
 }

@@ -8,12 +8,12 @@ import { User } from './user';
 })
 export class UsuarioService {
 
-  currentUserData: BehaviorSubject<User> = new BehaviorSubject<User>({ codigo: 0, user: '', rol_id: {} });
+  /* currentUserData: BehaviorSubject<User> = new BehaviorSubject<User>({ codigo: 0, user: '', rol_id: {} }); */
 
   private baseUrl = 'http://localhost:8090/fika/usuario';
   constructor(private http: HttpClient) { }
 
-  registrarUsuario(user: User) {
+  registrarUsuario(user: User): Observable<User> {
     return this.http.post<User>(this.baseUrl, user).pipe(
       catchError((error) => {
         console.error("Error en la solicitud de registro", error);
@@ -23,7 +23,7 @@ export class UsuarioService {
     );
   }
 
-  get userData(): Observable<User> {
-    return this.currentUserData.asObservable();
-  }
+  /*   get userData(): Observable<User> {
+      return this.currentUserData.asObservable();
+    } */
 }
