@@ -5,6 +5,7 @@ import { Rol } from 'src/services/rol';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/services/usuario.service';
 import { User } from 'src/services/user';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -23,13 +24,14 @@ export class RegistroUsuarioComponent implements OnInit {
     estate: 'Activo',
     rol_id: {}
   };
+  userExists = false;
+  emailExists = false;
 
 
   constructor(
     private usuarioService: UsuarioService,
     private rolService: RolService,
-    /* private formBuilder: FormBuilder,
-    private router: Router */
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -49,15 +51,51 @@ export class RegistroUsuarioComponent implements OnInit {
         console.log(rol);
       }
     )
+
+
+  }
+
+  checkUserExists(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    if (target) {
+      const user = target.value;
+      if (user) {
+        this.usuarioService.checkUserExists(user).subscribe(
+          (exists: boolean) => {
+            this.userExists = exists;
+          }
+        );
+      }
+    }
+  }
+
+  checkEmailExists(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    if (target) {
+      const email = target.value;
+      if (email) {
+        this.usuarioService.checkEmailExists(email).subscribe(
+          (exists: boolean) => {
+            this.emailExists = exists;
+          }
+        );
+      }
+    }
   }
 
   registrarUsuario() {
-    this.usuarioService.registrarUsuario(this.usuario).subscribe(response => {
-      console.log('Usuario registrado con éxito', response);
-      // Aquí puedes redirigir a otra página o mostrar un mensaje de éxito.
-    }, error => {
-      console.error('Error al registrar usuario', error);
-      // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje de error.
-    });
+    if (this.usuario.password != '' && this.usuario.user != '' && this.usuario.password != '') {
+      this.usuarioService.registrarUsuario(this.usuario).subscribe(response => {
+        console.log('Usuario registrado con éxito', response);
+        Swal.fire('¡Registro Exitoso!', 'Usuario Registrado Correctamente', 'success');
+        this.router.navigateByUrl('/inicio-login');
+      }, error => {
+        console.error('Error al registrar usuario', error);
+        this.registrationError = "Hubo un error al Registrar el usuario.";
+      });
+    } else {
+      this.registrationError = "Complete el formulario correctamente.";
+    }
   }
+
 }

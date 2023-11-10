@@ -81,3 +81,9 @@ form {
 .btn-login:hover {
     background-color: #258dc8;
 }
+
+.error-message {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 14px;
+}

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/services/login.service';
 import { LoginRequest } from 'src/services/loginRequest';
 import { User } from 'src/services/user';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-log-in',
@@ -36,10 +37,9 @@ export class LoginComponent implements OnInit {
       this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
         next: (userData: User) => {
           console.log(userData);
-
+          Swal.fire('¡Inicio Exitoso!', 'Loggin correcto', 'success');
           // Realiza el redireccionamiento aquí después de un inicio de sesión exitoso
           this.router.navigateByUrl('/inicio-login');
-
           // También puedes almacenar la información del usuario en el servicio o en localStorage
           // para acceder a ella en otras partes de la aplicación.
         },

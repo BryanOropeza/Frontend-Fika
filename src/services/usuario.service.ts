@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { User } from './user';
 
@@ -15,12 +15,23 @@ export class UsuarioService {
 
   registrarUsuario(user: User): Observable<User> {
     return this.http.post<User>(this.baseUrl, user).pipe(
-      catchError((error) => {
-        console.error("Error en la solicitud de registro", error);
-        // Aquí puedes manejar el error y proporcionar un mensaje más descriptivo.
-        return throwError("Error en la solicitud de registro");
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 409) {
+          // Mostrar un mensaje de error en el formulario
+          return throwError("El usuario o correo ya existen");
+        } else {
+          return throwError("Otro tipo de error en el registro");
+        }
       })
     );
+  }
+
+  checkUserExists(username: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/checkUser/${username}`);
+  }
+
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/checkEmail/${email}`);
   }
 
   /*   get userData(): Observable<User> {
