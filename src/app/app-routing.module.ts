@@ -4,9 +4,10 @@ import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.co
 import { LoginComponent } from './pages/log-in/log-in.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NavComponent } from './pages/nav/nav.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
 
 const routes: Routes = [
-  { path: '', component: NavComponent },
+  { path: '', component: MainPageComponent },
   { path: 'registro', component: RegistroUsuarioComponent },
   { path: 'login', component: LoginComponent },
   { path: 'inicio-login', component: DashboardComponent }

@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .ng-valid:not(form).ng-touched {
     border-left: 5px solid #42A948;
     /* green */

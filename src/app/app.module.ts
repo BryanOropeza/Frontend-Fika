@@ -10,6 +10,9 @@ import { LoginComponent } from './pages/log-in/log-in.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavComponent } from './pages/nav/nav.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+
 
 @NgModule({
   declarations: [
@@ -17,14 +20,16 @@ import { NavComponent } from './pages/nav/nav.component';
     RegistroUsuarioComponent,
     LoginComponent,
     DashboardComponent,
-    NavComponent
+    NavComponent,
+    MainPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SlickCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
