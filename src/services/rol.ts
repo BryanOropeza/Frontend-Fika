@@ -1,6 +1,7 @@
 export interface Rol {
-    codigo?: number;
+    codigo: number;
     nombre?: string;
     estado?: string;
+    editable?: boolean;
 
 }

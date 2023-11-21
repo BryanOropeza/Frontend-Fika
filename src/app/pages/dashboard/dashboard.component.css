@@ -1,0 +1,72 @@
+body {
+    margin-top: 20px;
+
+}
+
+a>img {
+    width: 80px;
+    height: 50px;
+}
+
+.btn-reservar {
+    background-color: rgb(218, 179, 131);
+    color: white;
+    text-decoration: none;
+    padding: 10px 10px;
+    border-radius: 10px;
+
+
+}
+
+.btn-reservar:hover {
+    background-color: rgb(236, 166, 79);
+}
+
+.custom-table {
+    margin-top: 50px;
+    /* Ajusta el valor según la altura de tu barra de navegación */
+}
+
+.table-container {
+    margin-top: 100px;
+    margin-left: 20px;
+    /* Margen izquierdo */
+    margin-right: 20px;
+    /* Margen derecho */
+}
+
+.btn {
+    margin: 5px;
+}
+
+h2 {
+    padding: 10px;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.list-group-item {
+    background-color: #f8f9fa;
+    border-color: #ced4da;
+}

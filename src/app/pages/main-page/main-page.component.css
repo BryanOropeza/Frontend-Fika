@@ -17,3 +17,144 @@ body {
     height: 100%;
     object-fit: cover;
 }
+
+.about {
+    background-color: #f1e8d9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.services {
+    margin-top: 20px;
+}
+
+.service {
+    background-color: #dcbf7a;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.contact {
+    background-color: #f1e8d9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+.gallery {
+    margin-top: 20px;
+}
+
+.gallery-item {
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.gallery-item img {
+    width: 100%;
+    transition: transform 0.3s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.1);
+}
+
+.centered-image {
+    display: flex;
+    justify-content: center;
+    /* Centrado horizontal */
+    align-items: center;
+    /* Centrado vertical */
+    height: 100%;
+    /* Asegura que ocupe toda la altura del contenedor */
+}
+
+.centered-image img {
+    max-width: 100%;
+    height: 600px;
+    /* Asegura que la imagen no se desborde */
+}
+
+.map {
+    border: 2px solid #dcbf7a;
+    /* Borde alrededor del mapa */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    overflow: hidden;
+    /* Para ocultar los bordes de las esquinas del mapa */
+}
+
+
+.contact {
+    padding: 40px 0;
+    background-color: #f1e8d9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.contact h2 {
+    margin-bottom: 30px;
+    color: #333;
+    text-align: center;
+}
+
+.contact p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+
+.contact address br {
+    display: none;
+    /* Oculta los saltos de línea dentro del <address> */
+}
+
+.contact .map {
+    margin-top: 20px;
+}
+
+/* Estilos específicos para la dirección en el <address> */
+.contact address {
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Estilos para hacer el mapa responsive */
+.contact iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.animated-image {
+    position: relative;
+    bottom: -20px;
+    /* Ajusta el valor para la altura de levitación */
+    left: 80%;
+    transform: translateX(-50%);
+    z-index: 1;
+    animation: levitate 2s infinite alternate ease-in-out;
+}
+
+@keyframes levitate {
+    0% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(-10px);
+        /* Ajusta el valor para la altura máxima de levitación */
+    }
+}
+
+.animated-image img {
+    max-width: 100%;
+    height: 240px;
+}
+
+.animated-image img:hover {
+    cursor: pointer;
+}

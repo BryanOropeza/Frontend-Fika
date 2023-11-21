@@ -1,2 +1,148 @@
-<app-nav></app-nav>
-<p>Usuario no autenticado</p>
+<script src="https://kit.fontawesome.com/dff9c8fdb2.js" crossorigin="anonymous"></script>
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['/']"><img src="../../../assets/logo-fika.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/']"><i class="fa-regular fa-user"></i>
+                        Cerrar
+                        Sesion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn-reservar" [routerLink]="['/reserva']">Reservar</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- ------------------------------------LISTA RESERVAS--- -->
+<div class="table-container">
+    <div class="mb-3">
+        <label for="filtroCodigo" class="form-label">Filtrar por código:</label>
+        <input type="text" class="form-control" id="filtroCodigo" [(ngModel)]="filtroCodigo">
+    </div>
+    <div class="mb-3">
+        <label for="filtroTratamiento" class="form-label">Filtrar por tratamiento:</label>
+        <input type="text" class="form-control" id="filtroTratamiento" [(ngModel)]="filtroTratamiento">
+    </div>
+    <table class="table table-striped table-hover custom-table">
+        <thead class="table-dark ">
+            <tr>
+                <th>Código</th>
+                <th>Fecha</th>
+                <th>Tratamiento</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+                <!-- Agregar más encabezados de columna según sea necesario -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cita of citas  | filter: filtroCodigo: filtroTratamiento; let i = index ">
+                <td *ngIf="!cita.editable">{{ cita.codigo }}</td>
+                <td *ngIf="!cita.editable">{{ cita.fechahora }}</td>
+                <td *ngIf="!cita.editable">{{ cita.tratamiento }}</td>
+                <td *ngIf="!cita.editable">{{ cita.estado }}</td>
+
+                <td *ngIf="cita.editable">
+                    <input type="text" [(ngModel)]="citas[i].codigo">
+                </td>
+                <td *ngIf="cita.editable">
+                    <input type="text" [(ngModel)]="citas[i].fechahora">
+                </td>
+                <td *ngIf="cita.editable">
+                    <input type="text" [(ngModel)]="citas[i].tratamiento">
+                </td>
+                <td *ngIf="cita.editable">
+                    <input type="text" [(ngModel)]="citas[i].estado">
+                </td>
+
+                <td>
+                    <button class="btn btn-primary" (click)="toggleEdicion(cita)"> {{ cita.editable ? 'Actualizar' :
+                        'Editar' }}</button>
+                    <button class="btn btn-danger" (click)="eliminarCita(cita.codigo)">Eliminar</button>
+                </td>
+                <!-- Mostrar más datos de reserva según sea necesario -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- ----CALENDARIO------ -->
+<h2>Calendario</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Domingo</th>
+            <th scope="col">Lunes</th>
+            <th scope="col">Martes</th>
+            <th scope="col">Miércoles</th>
+            <th scope="col">Jueves</th>
+            <th scope="col">Viernes</th>
+            <th scope="col">Sábado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let week of weeks">
+            <td *ngFor="let day of week">
+                <div *ngIf="day !== null" class="card p-2">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ day }}</h5>
+                        <ul class="list-group list-group-flush">
+                            <li *ngFor="let cita of getCitasForDay(day)" class="list-group-item">
+                                {{ cita.tratamiento }} - {{ cita.fechahora }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- ----ROLES------ -->
+<h2>Roles</h2>
+
+<div class="table-container">
+    <table class="table table-striped table-hover custom-table">
+        <thead class="table-dark ">
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+                <!-- Agregar más encabezados de columna según sea necesario -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let rol of roles; let i = index ">
+                <td *ngIf="!rol.editable">{{ rol.codigo }}</td>
+                <td *ngIf="!rol.editable">{{ rol.nombre }}</td>
+                <td *ngIf="!rol.editable">{{ rol.estado }}</td>
+
+
+                <td *ngIf="rol.editable">
+                    <input type="text" [(ngModel)]="roles[i].codigo">
+                </td>
+                <td *ngIf="rol.editable">
+                    <input type="text" [(ngModel)]="roles[i].nombre">
+                </td>
+                <td *ngIf="rol.editable">
+                    <input type="text" [(ngModel)]="roles[i].estado">
+                </td>
+
+
+                <td>
+                    <button class="btn btn-primary" (click)="toggleEdicionRol(rol)"> {{ rol.editable ? 'Actualizar' :
+                        'Editar' }}</button>
+                    <button class="btn btn-danger" (click)="eliminarRol(rol.codigo)">Eliminar</button>
+                </td>
+                <!-- Mostrar más datos de reserva según sea necesario -->
+            </tr>
+        </tbody>
+    </table>
+</div>

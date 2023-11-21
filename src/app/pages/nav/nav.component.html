@@ -1,3 +1,4 @@
+<script src="https://kit.fontawesome.com/dff9c8fdb2.js" crossorigin="anonymous"></script>
 <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" [routerLink]="['/']"><img src="../../../assets/logo-fika.png" alt=""></a>
@@ -8,17 +9,33 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" [routerLink]="['/']"
-                        routerLinkActive="router-link-active"><i class="fa-solid fa-house"></i></a>
-                </li>
-                <li *ngIf="!userLoginOn" class="nav-item">
-                    <a class="nav-link" [routerLink]="['/login']">Iniciar Sesion</a>
+                    <a class="nav-link " aria-current="page" [routerLink]="['/']"
+                        routerLinkActive="router-link-active"><i class="fa-solid fa-house"> </i></a>
                 </li>
                 <li *ngIf="userLoginOn" class="nav-item">
-                    <a class="nav-link" href="#">Cerrar Sesion</a>
+                    <a class="nav-link " href="#">Cerrar Sesion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about"><i class="fa-solid fa-briefcase"></i> Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#service"><i class="fa-solid fa-hand-holding-heart"></i> Nuestros
+                        Servicios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact"><i class="fa-solid fa-address-book "></i> Contáctanos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/registro']"><i class="fa-solid fa-right-to-bracket "></i>
+                        Registrarse</a>
                 </li>
                 <li *ngIf="!userLoginOn" class="nav-item">
-                    <a class="nav-link" [routerLink]="['/registro']">Registrar</a>
+                    <a class="nav-link" [routerLink]="['/login']"><i class="fa-regular fa-user"></i>
+                        Iniciar
+                        Sesion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn" [routerLink]="['/reserva']">Reservar</a>
                 </li>
             </ul>
         </div>

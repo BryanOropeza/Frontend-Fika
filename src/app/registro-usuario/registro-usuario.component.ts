@@ -15,14 +15,22 @@ import Swal from 'sweetalert2';
 export class RegistroUsuarioComponent implements OnInit {
   registrationError: String = "";
   roles: Rol[] = [];
-  rol: Rol = {};
+  rol: Rol = {
+    codigo: 0,
+    nombre: '',
+    estado: ''
+  };
   usuario: User = {
     codigo: 0,
     user: '', // Incluye un valor inicial para user
     email: '',
     password: '',
     estate: 'Activo',
-    rol_id: {}
+    rol_id: {
+      codigo: 0,
+      nombre: '',
+      estado: ''
+    }
   };
   userExists = false;
   emailExists = false;

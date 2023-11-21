@@ -38,8 +38,10 @@ export class LoginComponent implements OnInit {
         next: (userData: User) => {
           console.log(userData);
           Swal.fire('¡Inicio Exitoso!', 'Loggin correcto', 'success');
+
+          const userId = userData.codigo;
           // Realiza el redireccionamiento aquí después de un inicio de sesión exitoso
-          this.router.navigateByUrl('/inicio-login');
+          this.router.navigateByUrl(`/dashboard/${userId}`);
           // También puedes almacenar la información del usuario en el servicio o en localStorage
           // para acceder a ella en otras partes de la aplicación.
         },

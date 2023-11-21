@@ -1,0 +1,60 @@
+<div class="centered-form">
+    <h2>Reserva de cita</h2>
+    <form (ngSubmit)="agregarReserva()" #reservaForm="ngForm">
+        <div class="form-group">
+            <label for="dni">DNI del paciente</label>
+            <input type="number" id="dni" name="dni" [(ngModel)]="paciente.dni" required>
+        </div>
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" [(ngModel)]="paciente.nombre" required>
+        </div>
+        <div class="form-group">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" name="apellidos" [(ngModel)]="paciente.apellido" required>
+        </div>
+        <div class="form-group">
+            <label for="direccion">Direccion</label>
+            <input type="text" id="direccion" name="direccion" [(ngModel)]="paciente.direccion" required>
+        </div>
+        <div class="form-group">
+            <label for="telefono">Telefono</label>
+            <input type="number" id="telefono" name="telefono" [(ngModel)]="paciente.telefono" required>
+        </div>
+        <div class="form-group">
+            <label for="fechanacimiento">Fecha de Nacimiento</label>
+            <input type="date" id="fechanacimiento" name="fechanacimiento" [(ngModel)]="paciente.fechanacimiento"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="sexo">Sexo</label>
+            <select id="sexo" name="sexo" [(ngModel)]="paciente.sexo" required>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="observaciones">Observaciones</label>
+            <input type="text_area" id="observaciones" name="observaciones" [(ngModel)]="cita.observaciones" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fechahora">Fecha</label>
+            <input type="datetime-local" id=" fechahora" name="fechahora" [(ngModel)]="cita.fechahora"
+                (input)="checkDateExists($event)" required>
+            <div class="error-message" *ngIf="dateExists">La fecha ya se encuentra Registrada</div>
+        </div>
+        <div class="form-group">
+            <label for="tratamiento">Tratamiento</label>
+            <select id="tratamiento" name="tratamiento" [(ngModel)]="cita.tratamiento" required>
+                <option value="Sesiones de Belleza">Sesiones de Belleza</option>
+                <option value="Fisioterapia">Fisioterapia</option>
+            </select>
+        </div>
+        <p *ngIf="reservaError" class="error-message">{{ reservaError }}</p>
+        <!-- Otros campos relacionados con la cita como observaciones, estado, etc. -->
+        <!-- <p *ngIf="errorCita" class="error-message">{{ errorCita }}</p> -->
+        <button type="submit" class="btn btn-primary" [disabled]="!reservaForm.form.valid || dateExists">Reservar
+            cita</button>
+    </form>
+</div>
