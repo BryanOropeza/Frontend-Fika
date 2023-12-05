@@ -37,6 +37,7 @@ export class ReservaComponent implements OnInit {
   }
 
   dateExists = false;
+  dateOutOfTime = false;
 
 
 
@@ -67,6 +68,23 @@ export class ReservaComponent implements OnInit {
             this.dateExists = exists;
           }
         );
+      }
+    }
+  }
+
+  checkDateOutTime(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    if (target) {
+      const date = target.value;
+      const formattedDate = formatDate(date, 'yyyy-MM-ddTHH:mm:ss', 'en-US');
+      const dateobj = new Date(formattedDate);
+
+      if (dateobj) {
+        this.reservaService.isDateOutOfTime(dateobj).subscribe(
+          (exists: boolean) => {
+            this.dateOutOfTime = exists;
+          }
+        )
       }
     }
   }
@@ -124,8 +142,7 @@ export class ReservaComponent implements OnInit {
             const detalle = this.cita.estado;
 
             const mensaje = `<div><b>Fecha de la cita:</b> ${fechaCita}</div>
-                            <div><b>Tratamiento:</b> ${nombreCita}</div>
-                            <div><b>Estado:</b> ${detalle}</div>`;
+                            <div><b>Tratamiento:</b> ${nombreCita}</div>`;
 
             Swal.fire({
               title: '¡Registro Exitoso!',

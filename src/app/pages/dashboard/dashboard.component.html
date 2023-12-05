@@ -36,30 +36,25 @@
                 <th>Código</th>
                 <th>Fecha</th>
                 <th>Tratamiento</th>
-                <th>Estado</th>
                 <th>Acciones</th>
                 <!-- Agregar más encabezados de columna según sea necesario -->
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let cita of citas  | filter: filtroCodigo: filtroTratamiento; let i = index ">
-                <td *ngIf="!cita.editable">{{ cita.codigo }}</td>
+                <td>{{ cita.codigo }}</td>
                 <td *ngIf="!cita.editable">{{ cita.fechahora }}</td>
                 <td *ngIf="!cita.editable">{{ cita.tratamiento }}</td>
-                <td *ngIf="!cita.editable">{{ cita.estado }}</td>
 
-                <td *ngIf="cita.editable">
-                    <input type="text" [(ngModel)]="citas[i].codigo">
-                </td>
+
+
                 <td *ngIf="cita.editable">
                     <input type="text" [(ngModel)]="citas[i].fechahora">
                 </td>
                 <td *ngIf="cita.editable">
                     <input type="text" [(ngModel)]="citas[i].tratamiento">
                 </td>
-                <td *ngIf="cita.editable">
-                    <input type="text" [(ngModel)]="citas[i].estado">
-                </td>
+
 
                 <td>
                     <button class="btn btn-primary" (click)="toggleEdicion(cita)"> {{ cita.editable ? 'Actualizar' :
@@ -113,26 +108,24 @@
             <tr>
                 <th>Código</th>
                 <th>Nombre</th>
-                <th>Estado</th>
                 <th>Acciones</th>
                 <!-- Agregar más encabezados de columna según sea necesario -->
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let rol of roles; let i = index ">
-                <td *ngIf="!rol.editable">{{ rol.codigo }}</td>
+                <td>{{ rol.codigo }}</td>
                 <td *ngIf="!rol.editable">{{ rol.nombre }}</td>
-                <td *ngIf="!rol.editable">{{ rol.estado }}</td>
+
+
 
 
                 <td *ngIf="rol.editable">
-                    <input type="text" [(ngModel)]="roles[i].codigo">
-                </td>
-                <td *ngIf="rol.editable">
-                    <input type="text" [(ngModel)]="roles[i].nombre">
-                </td>
-                <td *ngIf="rol.editable">
-                    <input type="text" [(ngModel)]="roles[i].estado">
+                    <select id="nombre" name="nombre" [(ngModel)]="roles[i].nombre">
+                        <option value="Admin">Admin</option>
+                        <option value="General">General</option>
+                        <option value="Empleado">Empleado</option>
+                    </select>
                 </td>
 
 

@@ -1,29 +1,40 @@
-<div class="centered-form">
-    <h2 class="form-title">Fika Health & Beauty</h2>
-    <form [formGroup]="loginForm">
-        <p class="text-danger">{{loginError}}</p>
-        <div class="mb-3">
-            <label for="exampleInputUser1" class="form-label">Usuario</label>
-            <input formControlName="user" type="user" class="form-control" id="exampleInputUser1"
-                aria-describedby="userHelp">
-            <div *ngIf="user.invalid && (user.dirty || user.touched)" class="text-danger">
-                <div *ngIf="user.errors?.['required']">
-                    El Usuario es requerido.
+<div class="container">
+    <div class="form-box">
+        <form [formGroup]="loginForm" class="form">
+            <div class="form-section">
+                <a href="#"><img src="../../../assets/logo-fika.png" alt="" class="logo"></a>
+                <h2 class="form-title" class="title">Fika Health & Beauty</h2>
+                <p class="subtitle">¡Bienvenido!</p>
+            </div>
+            <p class="text-danger">{{loginError}}</p>
+            <div class="form-container">
+                <div class="form-group">
+                    <input formControlName="user" type="user" class="form-control" id="exampleInputUser1"
+                        aria-describedby="userHelp" class="input" placeholder="Nombre de usuario">
+                    <div *ngIf="user.invalid && (user.dirty || user.touched)" class="text-danger">
+                        <div *ngIf="user.errors?.['required']">
+                            El Usuario es requerido.
+                        </div>
+                        <div *ngIf="user.errors?.['user']">
+                            El Usuario debe tener un formato válido.
+                        </div>
+                    </div>
                 </div>
-                <div *ngIf="user.errors?.['user']">
-                    El Usuario debe tener un formato válido.
+                <div class="form-group">
+                    <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1"
+                        class="input" placeholder="Contraseña">
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+                        <div *ngIf="password.errors?.['required']">
+                            La contraseña es requerida.
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-            <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1">
-            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
-                <div *ngIf="password.errors?.['required']">
-                    La contraseña es requerida.
-                </div>
+            <div class="form-section">
+                <button type="submit" (click)="login()" class="btn-submit">Iniciar Sesión</button>
+                <br>
+                <a [routerLink]="['/registro']">¿No tienes una cuenta? Registrate.</a>
             </div>
-        </div>
-        <button type="submit" (click)="login()" class="btn btn-primary">Iniciar Sesión</button>
-    </form>
+        </form>
+    </div>
 </div>

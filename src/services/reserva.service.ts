@@ -47,4 +47,8 @@ export class ReservaService {
   checkDateExists(date: Date): Observable<boolean> {
     return this.http.get<boolean>(`${this.baseURL}/citas/checkDate/${date}`);
   }
+
+  isDateOutOfTime(date: Date): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseURL}/citas/checkDateOutOfTime/${date}`);
+  }
 }
