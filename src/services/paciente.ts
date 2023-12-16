@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export interface Paciente {
     codigo?: number,
     dni?: string,
@@ -9,4 +11,5 @@ export interface Paciente {
     estado?: string,
     sexo?: string,
     observaciones?: string,
+    usuario: User
 }

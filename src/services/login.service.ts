@@ -11,7 +11,9 @@ import { User } from './user';
 export class LoginService {
 
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  currentUserData: BehaviorSubject<User> = new BehaviorSubject<User>({ codigo: 0, user: '', rol_id: { codigo: 0, nombre: '', estado: '' } });
+  currentUserData: BehaviorSubject<User> = new BehaviorSubject<User>({
+    codigo: 0, user: '', rol_id: { codigo: 0, nombre: '', estado: '' }
+  });
 
   constructor(private http: HttpClient) { }
 

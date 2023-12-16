@@ -40,6 +40,8 @@ export class LoginComponent implements OnInit {
           Swal.fire('¡Inicio Exitoso!', 'Loggin correcto', 'success');
 
           const userId = userData.codigo;
+          // Almacena el objeto completo de usuario en localStorage
+          localStorage.setItem('currentUser', JSON.stringify(userData));
           // Realiza el redireccionamiento aquí después de un inicio de sesión exitoso
           this.router.navigateByUrl(`/dashboard/${userId}`);
           // También puedes almacenar la información del usuario en el servicio o en localStorage

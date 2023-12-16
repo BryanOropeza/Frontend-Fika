@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { User } from './user';
+import { Paciente } from './paciente';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,12 @@ export class UsuarioService {
     return this.http.get<boolean>(`${this.baseUrl}/checkEmail/${email}`);
   }
 
-  /*   get userData(): Observable<User> {
-      return this.currentUserData.asObservable();
-    } */
+  getUser(userId: number): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/${userId}`);
+  }
+
+  resetPassword(username: string, newPassword: string): Observable<any> {
+    const resetRequest = { user: username, password: newPassword };
+    return this.http.post<any>(`${this.baseUrl}/reset-password`, resetRequest);
+  }
 }

@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
+  // Variables para la oferta especial
+  originalPrice: number = 200;
+  discountedPrice: number = 120;
+  discountPercentage: number;
+
   //SLIDER CONFIGURATION------------------
   slides = [
     { img: "../../../assets/slider1.png" },
@@ -74,7 +79,9 @@ export class MainPageComponent implements OnInit {
     console.log('beforeChange');
   }
 
-  constructor() { }
+  constructor() {
+    this.discountPercentage = ((this.originalPrice - this.discountedPrice) / this.originalPrice) * 100;
+  }
 
   ngOnInit() { }
 }

@@ -12,7 +12,7 @@ export class PacienteService {
 
   constructor(private http: HttpClient) { }
 
-  agregarPaciente(paciente: Paciente): Observable<Paciente> {
+  /* agregarPaciente(paciente: Paciente): Observable<Paciente> {
     return this.http.post<Paciente>(`${this.baseUrl}/paciente`, paciente).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 409) {
@@ -23,5 +23,20 @@ export class PacienteService {
         }
       })
     );
+  } */
+
+  agregarPaciente(usuarioId: number, paciente: Paciente): Observable<Paciente> {
+    return this.http.post<Paciente>(`${this.baseUrl}/paciente/${usuarioId}`, paciente)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 409) {
+            // Manejar el error de paciente existente
+            throw new Error("El paciente ya existe");
+          } else {
+            // Manejar otros tipos de errores
+            throw new Error("Otro tipo de error en el registro del paciente");
+          }
+        })
+      );
   }
 }

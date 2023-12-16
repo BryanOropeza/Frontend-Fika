@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/log-in/log-in.component';
@@ -16,19 +15,20 @@ import { ReservaComponent } from './pages/reserva/reserva.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { PasswordComponent } from './pages/log-in/password/password.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistroUsuarioComponent,
     LoginComponent,
     DashboardComponent,
     NavComponent,
     MainPageComponent,
     ReservaComponent,
-    FilterPipe
+    FilterPipe,
+    PasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { Paciente } from "./paciente";
 import { Rol } from "./rol";
 
 export interface User {

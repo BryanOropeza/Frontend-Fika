@@ -35,6 +35,36 @@ body {
     margin-bottom: 20px;
 }
 
+/* Estilos para la sección de Oferta Especial */
+.special-offer {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.special-offer h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.special-offer p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.special-offer .price-info {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.special-offer .discount {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+
 .contact {
     background-color: #f1e8d9;
     padding: 20px;

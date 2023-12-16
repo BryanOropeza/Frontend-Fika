@@ -10,7 +10,7 @@
             <div class="form-container">
                 <div class="form-group">
                     <input formControlName="user" type="user" class="form-control" id="exampleInputUser1"
-                        aria-describedby="userHelp" class="input" placeholder="Nombre de usuario">
+                        aria-describedby="userHelp" class="input" placeholder="Ingrese su DNI">
                     <div *ngIf="user.invalid && (user.dirty || user.touched)" class="text-danger">
                         <div *ngIf="user.errors?.['required']">
                             El Usuario es requerido.
@@ -33,7 +33,9 @@
             <div class="form-section">
                 <button type="submit" (click)="login()" class="btn-submit">Iniciar Sesión</button>
                 <br>
-                <a [routerLink]="['/registro']">¿No tienes una cuenta? Registrate.</a>
+                <a [routerLink]="['/reserva']">¿No tienes una cuenta? Registrate.</a>
+                <br>
+                <a [routerLink]="['/restablecer']">¿Olvidaste tu contraseña?</a>
             </div>
         </form>
     </div>

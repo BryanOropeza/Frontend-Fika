@@ -1,10 +1,12 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CalendarEvent } from 'angular-calendar';
 import { endOfDay, startOfDay } from 'date-fns';
 import { Cita } from 'src/services/cita';
 import { ReservaService } from 'src/services/reserva.service';
 import { Rol } from 'src/services/rol';
 import { RolService } from 'src/services/rol.service';
+import { User } from 'src/services/user';
 import Swal from 'sweetalert2';
 
 @Pipe({
@@ -45,6 +47,19 @@ export class FilterPipe implements PipeTransform {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  isAdmin = false;
+  user: User = {
+    codigo: 0,
+    user: '', // Incluye un valor inicial para user
+    email: '',
+    password: '',
+    estate: 'Activo',
+    rol_id: {
+      codigo: 0,
+      nombre: '',
+      estado: ''
+    }
+  };
   citas: Cita[] = [];
   weeks: any[] = [];
   filtroCodigo: string = ''; // Agrega filtroCodigo
@@ -54,7 +69,30 @@ export class DashboardComponent implements OnInit {
     fechahora: new Date(),
     tratamiento: '',
     estado: 'Activo',
-    pacienteid: {},
+    pacienteid: {
+      codigo: 0,
+      dni: '',
+      nombre: '',
+      apellido: '',
+      direccion: '',
+      telefono: '',
+      fechanacimiento: '',
+      estado: 'Activo',
+      sexo: '',
+      observaciones: '',
+      usuario: {
+        codigo: 0,
+        user: '', // Incluye un valor inicial para user
+        email: '',
+        password: '',
+        estate: 'Activo',
+        rol_id: {
+          codigo: 0,
+          nombre: '',
+          estado: ''
+        }
+      },
+    },
     observaciones: '',
     editable: false
   }
@@ -70,9 +108,20 @@ export class DashboardComponent implements OnInit {
   }
   roles: Rol[] = [];
 
-  constructor(private reservaService: ReservaService, private rolService: RolService) { }
+  constructor(private reservaService: ReservaService, private rolService: RolService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser) {
+      this.user = JSON.parse(currentUser);
+      console.log('Usuario en el Dashboard:', this.user);
+      // Comprobamos si el usuario es administrador, verificando si rol_id está definido y es 'Admin'
+      if (this.user.rol_id && this.user.rol_id.nombre === 'Admin') {
+        this.isAdmin = true;
+      }
+    } else {
+      console.error('No se pudo obtener el usuario');
+    }
     this.getCitasReservadas();
     this.getRolesEncontrados();
   }

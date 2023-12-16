@@ -1,50 +1,99 @@
 <div class="container">
     <div class="form-box">
-        <form (ngSubmit)="agregarReserva()" #reservaForm="ngForm" class="form">
-            <div class="form-section">
+        <form #reservaForm="ngForm" class="form" method="post">
+            <div class="form-section" *ngIf="pasoActual === 1">
                 <a href="#"><img src="../../../assets/logo-fika.png" alt="" class="logo"></a>
-                <h2 class="title">Reserva de cita</h2>
-                <p class="subtitle">Reserva tu cita fácil, rápido y segudo</p>
+                <h2 class="title">Registro de Usuario</h2>
+                <p class="subtitle">¡Empecemos creando tu cuenta!</p>
+            </div>
+            <div class="form-section" *ngIf="pasoActual === 2">
+                <a href="#"><img src="../../../assets/logo-fika.png" alt="" class="logo"></a>
+                <h2 class="title">Datos de Paciente</h2>
+                <p class="subtitle">Queremos conocerte mejor</p>
+            </div>
+            <div class="form-section" *ngIf="pasoActual === 3">
+                <a href="#"><img src="../../../assets/logo-fika.png" alt="" class="logo"></a>
+                <h2 class="title">Reserva tu cita</h2>
+                <p class="subtitle">Finalmente genera tu reserva, rápido y seguro</p>
             </div>
             <div class="form-container">
-                <div class="form-group">
-                    <input type="number" id="dni" name="dni" [(ngModel)]="paciente.dni" class="input"
-                        placeholder="Documento de Identidad" required>
+                <!--  ----------------------------------APARTADO USUARIO------------------------------------  -->
+                <div class="form-group" *ngIf="pasoActual === 1">
+                    <input type="text" id="user" name="user" [(ngModel)]="usuario.user"
+                        (input)="checkUserExists($event)" required class="input" placeholder="Ingrese su DNI">
+                    <div class="error-message" *ngIf="userExists">El usuario ya existe</div>
                 </div>
-                <div class="form-group">
+
+                <div class="form-group" *ngIf="pasoActual === 1">
+                    <input type="email" id="email" name="email" [(ngModel)]="usuario.email"
+                        (input)="checkEmailExists($event)" required class="input" placeholder="Correo electrónico">
+                    <div class="error-message" *ngIf="emailExists">El correo electrónico ya está registrado</div>
+                </div>
+
+                <div class="form-group" *ngIf="pasoActual === 1">
+                    <input type="password" id="password" name="password" [(ngModel)]="usuario.password" required
+                        (ngModelChange)="validatePassword($event)" class="input" placeholder="Contraseña">
+                    <div class="error-message" *ngIf="passwordError.lengthError">{{
+                        passwordError.errorMessages.lengthErrorMessage }}</div>
+                    <div class="error-message" *ngIf="passwordError.commonPasswordError">{{
+                        passwordError.errorMessages.commonPasswordErrorMessage }}</div>
+                    <div class="error-message" *ngIf="passwordError.specialCaractersError">{{
+                        passwordError.errorMessages.specialCaractersErrorMessage }}</div>
+                    <div class="error-message" *ngIf="passwordError.upperCaseError">{{
+                        passwordError.errorMessages.upperCaseErrorMessage }}</div>
+                </div>
+                <div class="form-group" style="display: none;" *ngIf="pasoActual === 1">
+                    <label for="estate">Estado</label>
+                    <input type="text" id="estate" name="estate" [(ngModel)]="usuario.estate">
+                </div>
+                <p *ngIf="registrationError" class="error-message">{{ registrationError }}</p>
+                <div class="form-section" *ngIf="pasoActual === 1">
+                    <button (click)="DatosUsuarioCompletados()" class="btn btn-primary"
+                        class="btn-submit">Continuar</button>
+                    <br *ngIf="pasoActual === 1">
+                    <a [routerLink]="['/login']" *ngIf="pasoActual === 1">¿Ya tienes una cuenta? ingresa aqui.</a>
+                </div>
+                <!--  -------------------------------------------------------------------------------  -->
+                <!--  -------------------------------------APARTADO DE PACIENTE------------------------------------------  -->
+                <div class="form-group" *ngIf="pasoActual === 2">
                     <input type="text" id="nombre" name="nombre" [(ngModel)]="paciente.nombre" class="input"
                         placeholder="Nombre Completo" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="pasoActual === 2">
                     <input type="text" id="apellidos" name="apellidos" [(ngModel)]="paciente.apellido" class="input"
                         placeholder="Apellidos" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="pasoActual === 2">
                     <input type="text" id="direccion" name="direccion" [(ngModel)]="paciente.direccion" class="input"
                         placeholder="Direccion" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="pasoActual === 2">
                     <input type="number" id="telefono" name="telefono" [(ngModel)]="paciente.telefono" class="input"
                         placeholder="Telefono" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="pasoActual === 2">
                     <label for="fechanacimiento">Fecha de Nacimiento</label>
                     <input type="date" id="fechanacimiento" name="fechanacimiento"
                         [(ngModel)]="paciente.fechanacimiento" class="input" placeholder="Fecha de Nacimiento" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="pasoActual === 2">
                     <label for="sexo">Sexo</label>
                     <select id="sexo" name="sexo" [(ngModel)]="paciente.sexo" class="input" placeholder="Sexo" required>
                         <option value="Masculino">Masculino</option>
                         <option value="Femenino">Femenino</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-section" *ngIf="pasoActual === 2">
+                    <button (click)="DatosPacienteCompletados()" class="btn btn-primary"
+                        class="btn-submit">Continuar</button>
+                </div>
+                <!--  -------------------------------------APARTADO DE RESERVA------------------------------------------  -->
+                <div class="form-group" *ngIf="pasoActual === 3">
                     <input type="text_area" id="observaciones" name="observaciones" [(ngModel)]="cita.observaciones"
                         class="input" placeholder="Observaciones" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" *ngIf="pasoActual === 3">
                     <label for="sexo">Día y Hora</label>
                     <input type="datetime-local" id=" fechahora" name="fechahora" [(ngModel)]="cita.fechahora"
                         (input)="checkDateExists($event)" (input)="checkDateOutTime($event)" class="input"
@@ -52,7 +101,7 @@
                     <div class="error-message" *ngIf="dateExists">La fecha ya se encuentra Registrada</div>
                     <div class="error-message" *ngIf="dateOutOfTime">Las fecha elegida debe ser actual o posterior</div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="pasoActual === 3">
                     <label for="sexo">Tipo de Tratamiento</label>
                     <select id="tratamiento" name="tratamiento" [(ngModel)]="cita.tratamiento" class="input"
                         placeholder="Tipo de Tratamiento" required>
@@ -62,13 +111,10 @@
                 </div>
                 <p *ngIf="reservaError" class="error-message">{{ reservaError }}</p>
             </div>
-            <!-- Otros campos relacionados con la cita como observaciones, estado, etc. -->
-            <!-- <p *ngIf="errorCita" class="error-message">{{ errorCita }}</p> -->
-            <div class="form-section">
-                <button type="submit" class="btn btn-primary" [disabled]="!reservaForm.form.valid || dateExists"
-                    class="btn-submit">Reservar
-                    cita</button>
-
+            <div class="form-section" *ngIf="pasoActual === 3">
+                <button (click)="DatosTotalesCompletos(); enviarCorreo()" type="submit" class="btn btn-primary"
+                    [disabled]="!reservaForm.form.valid || dateExists" class="btn-submit">Reservar
+                </button>
             </div>
         </form>
     </div>

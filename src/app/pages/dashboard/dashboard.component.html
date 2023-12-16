@@ -68,74 +68,79 @@
 </div>
 
 <!-- ----CALENDARIO------ -->
-<h2>Calendario</h2>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th scope="col">Domingo</th>
-            <th scope="col">Lunes</th>
-            <th scope="col">Martes</th>
-            <th scope="col">Miércoles</th>
-            <th scope="col">Jueves</th>
-            <th scope="col">Viernes</th>
-            <th scope="col">Sábado</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let week of weeks">
-            <td *ngFor="let day of week">
-                <div *ngIf="day !== null" class="card p-2">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ day }}</h5>
-                        <ul class="list-group list-group-flush">
-                            <li *ngFor="let cita of getCitasForDay(day)" class="list-group-item">
-                                {{ cita.tratamiento }} - {{ cita.fechahora }}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<!-- ----ROLES------ -->
-<h2>Roles</h2>
-
-<div class="table-container">
-    <table class="table table-striped table-hover custom-table">
-        <thead class="table-dark ">
+<div class="calendario" *ngIf="isAdmin">
+    <h2>Calendario</h2>
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <th>Código</th>
-                <th>Nombre</th>
-                <th>Acciones</th>
-                <!-- Agregar más encabezados de columna según sea necesario -->
+                <th scope="col">Domingo</th>
+                <th scope="col">Lunes</th>
+                <th scope="col">Martes</th>
+                <th scope="col">Miércoles</th>
+                <th scope="col">Jueves</th>
+                <th scope="col">Viernes</th>
+                <th scope="col">Sábado</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let rol of roles; let i = index ">
-                <td>{{ rol.codigo }}</td>
-                <td *ngIf="!rol.editable">{{ rol.nombre }}</td>
-
-
-
-
-                <td *ngIf="rol.editable">
-                    <select id="nombre" name="nombre" [(ngModel)]="roles[i].nombre">
-                        <option value="Admin">Admin</option>
-                        <option value="General">General</option>
-                        <option value="Empleado">Empleado</option>
-                    </select>
+            <tr *ngFor="let week of weeks">
+                <td *ngFor="let day of week">
+                    <div *ngIf="day !== null" class="card p-2">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ day }}</h5>
+                            <ul class="list-group list-group-flush">
+                                <li *ngFor="let cita of getCitasForDay(day)" class="list-group-item">
+                                    {{ cita.tratamiento }} - {{ cita.fechahora }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </td>
-
-
-                <td>
-                    <button class="btn btn-primary" (click)="toggleEdicionRol(rol)"> {{ rol.editable ? 'Actualizar' :
-                        'Editar' }}</button>
-                    <button class="btn btn-danger" (click)="eliminarRol(rol.codigo)">Eliminar</button>
-                </td>
-                <!-- Mostrar más datos de reserva según sea necesario -->
             </tr>
         </tbody>
     </table>
+</div>
+
+<!-- ----ROLES------ -->
+<div class="roles" *ngIf="isAdmin">
+    <h2>Roles</h2>
+
+    <div class="table-container">
+        <table class="table table-striped table-hover custom-table">
+            <thead class="table-dark ">
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                    <!-- Agregar más encabezados de columna según sea necesario -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let rol of roles; let i = index ">
+                    <td>{{ rol.codigo }}</td>
+                    <td *ngIf="!rol.editable">{{ rol.nombre }}</td>
+
+
+
+
+                    <td *ngIf="rol.editable">
+                        <select id="nombre" name="nombre" [(ngModel)]="roles[i].nombre">
+                            <option value="Admin">Admin</option>
+                            <option value="General">General</option>
+                            <option value="Empleado">Empleado</option>
+                        </select>
+                    </td>
+
+
+                    <td>
+                        <button class="btn btn-primary" (click)="toggleEdicionRol(rol)"> {{ rol.editable ? 'Actualizar'
+                            :
+                            'Editar' }}</button>
+                        <button class="btn btn-danger" (click)="eliminarRol(rol.codigo)">Eliminar</button>
+                    </td>
+                    <!-- Mostrar más datos de reserva según sea necesario -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
