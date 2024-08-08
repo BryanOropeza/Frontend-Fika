@@ -4,7 +4,7 @@
 
 La empresa Fika Health & Beauty es una empresa orientada al rubro de Sesiones de Belleza y Tratamientos fisioterapéuticos. Por lo que dentro de sus variadas gestiones y logísticas una de ellas es esencial para el
 correcto cumplimiento de sus objetivos: La reserva de citas para poder establecer las citas pendientes y por realizar. El proyecto completo se encuentra divido en dos partes,
-siendo este, el apartado del back correspondiente. Pueden visitar el apartado frontend aquí: - [Backend-Fika](https://github.com/BryanOropeza/Backend-Fika)
+siendo este, el apartado del front correspondiente. Pueden visitar el apartado backend aquí: - [Backend-Fika](https://github.com/BryanOropeza/Backend-Fika)
 
 ## INDICE
 - [INFORMACIÓN DE LA EMPRESA](#Información)
