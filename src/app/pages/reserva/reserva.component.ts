@@ -11,6 +11,7 @@ import { RolService } from 'src/services/rol.service';
 import { User } from 'src/services/user';
 import { UsuarioService } from 'src/services/usuario.service';
 import Swal from 'sweetalert2';
+import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -161,21 +162,19 @@ export class ReservaComponent implements OnInit {
   ngOnInit() {
     //APARTADO DE REGISTRO DE USUARIO
     // Obtener la lista de roles al inicializar el componente
-    this.rolService.getRoles().subscribe(
-      (roles) => {
-        this.roles = roles;
-      },
-      (error) => {
-        console.error('Error al obtener la lista de roles', error);
-      }
-    );
-
-    this.rolService.getRol().subscribe(
-      (rol) => {
-        this.usuario.rol_id = rol;
-        console.log(rol);
-      }
-    )
+      this.rolService.getRoles().subscribe(
+        (roles: Rol[]) => {
+          const rol = roles.find((r) => r.codigo === 2); // Busca el rol con código 2
+          if (rol) {
+            this.usuario.rol_id = rol; // Asigna el ID del rol al usuario
+            console.log(rol); // Muestra el rol encontrado
+          }
+        },
+        (error) => {
+          console.error('Error al obtener la lista de roles', error);
+        }
+      );
+    
     //APARTADO DE PACIENTE
 
     //APARTADO DE RESERVA
@@ -389,11 +388,11 @@ export class ReservaComponent implements OnInit {
           this.registrationError = "Complete el formulario correctamente.";
         }
       }
-      this.enviarCorreo();
+      /* this.enviarCorreo(); */
     });
   }
 
-  //enviar correo
+  /* //enviar correo
   enviarCorreo(): void {
     const datosReserva = {
       email: this.usuario.email, // Obtén el correo electrónico del usuario desde el formulario
@@ -408,5 +407,5 @@ export class ReservaComponent implements OnInit {
         console.error('Error al enviar los datos al backend:', error);
         // Manejo de errores
       });
-  }
+  } */
 }

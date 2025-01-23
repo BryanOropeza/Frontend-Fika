@@ -112,7 +112,7 @@
                 <p *ngIf="reservaError" class="error-message">{{ reservaError }}</p>
             </div>
             <div class="form-section" *ngIf="pasoActual === 3">
-                <button (click)="DatosTotalesCompletos(); enviarCorreo()" type="submit" class="btn btn-primary"
+                <button (click)="DatosTotalesCompletos();" type="submit" class="btn btn-primary"
                     [disabled]="!reservaForm.form.valid || dateExists" class="btn-submit">Reservar
                 </button>
             </div>
